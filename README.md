@@ -45,43 +45,53 @@ python3 -m pip install pytest flake8
 > - Add `--user` flag: `pip3 install --user pytest flake8`
 > - Use a virtual environment (recommended for project isolation)
 
-2. Open the Pull Request (PR) and Observe
-Go to your repository on GitHub.
+---
 
-Click the "Compare & pull request" banner.
+## 🔴 Exercise 1: Introduce a Bug and Observe CI Failure (RED Check)
 
-Click "Create pull request."
+### 1. Open the Pull Request (PR) and Observe
 
-Go to the Checks tab on the PR page.
+1. Go to your repository on GitHub
+2. Click the **"Compare & pull request"** banner
+3. Click **"Create pull request"**
+4. Go to the **Checks** tab on the PR page
 
-Expected Result: The pipeline status will resolve to RED (Failed), proving the bug was caught automatically.
+**Expected Result**: The pipeline status will resolve to **RED (Failed)**, proving the bug was caught automatically.
 
-🟢 Exercise 2: Fix the Bug and Pass CI (GREEN Check)
+---
+
+## 🟢 Exercise 2: Fix the Bug and Pass CI (GREEN Check)
+
 This exercise shows getting instant, automated approval after fixing the issue.
 
-1. Fix the Code Locally
-Open app.py in your editor and correct the bug in the calculate_discount function:
+### 1. Fix the Code Locally
 
-Python
+Open `app.py` in your editor and correct the bug in the `calculate_discount` function:
 
-# Locate this line in app.py:
-# discount_amount = price * 0.01
+**Locate this line in `app.py`:**
+```python
+discount_amount = price * 0.01
+```
 
-# Change it to:
-discount_amount = price * rate 
-2. Commit and Push the Fix
+**Change it to:**
+```python
+discount_amount = price * rate
+```
+
+### 2. Commit and Push the Fix
+
 Commit the correction and push to the same open PR branch. This automatically triggers a pipeline rerun.
-
-Bash
-
-# 1. Commit the fix
+```bash
+# Commit the fix
 git commit -am "Fix: Corrected discount calculation logic."
 
-# 2. Push to update the open PR
+# Push to update the open PR
 git push
-3. Final Validation
-Return to the PR page on GitHub.
+```
 
-Observe the pipeline rerun.
+### 3. Final Validation
 
-Expected Result: The status will resolve to GREEN (Success). The code is now validated and ready to merge.
+1. Return to the PR page on GitHub
+2. Observe the pipeline rerun
+
+**Expected Result**: The status will resolve to **GREEN (Success)**. The code is now validated and ready to merge.
