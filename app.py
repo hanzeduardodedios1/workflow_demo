@@ -7,14 +7,14 @@ def add_two_numbers(a, b):
 def calculate_discount(price, rate=0.10):
     """
     Calculates the final price after applying a discount.
-    Used to demonstrate a potential bug scenario.
+    
+    This function contains a known bug: it currently only applies a 1% 
+    discount regardless of the 'rate' argument.
     """
-    # This line has an intentional, subtle logic bug for the demo!
-    # It should be price * rate, not price * 0.01.
+    # BUG: This calculation uses a fixed 0.01 (1%) instead of the variable 'rate'.
     discount_amount = price * 0.01  
     return price - discount_amount
 
 if __name__ == "__main__":
-    # Example usage (not run by CI)
     print(f"5 + 3 = {add_two_numbers(5, 3)}")
-    print(f"Discount on $100: {calculate_discount(100)}")
+    print(f"Discount on $100 (10% expected): {calculate_discount(100)}")
