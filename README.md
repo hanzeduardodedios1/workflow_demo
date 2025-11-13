@@ -47,51 +47,60 @@ python3 -m pip install pytest flake8
 
 ---
 
-## 🔴 Exercise 1: Introduce a Bug and Observe CI Failure (RED Check)
+# CI Demo Steps: Bug to Fix
 
-### 1. Open the Pull Request (PR) and Observe
+This process starts with the buggy code in your local `feature/discount-fix-attempt` branch and ends with a successful merge validation on GitHub.
 
-1. Go to your repository on GitHub
-2. Click the **"Compare & pull request"** banner
-3. Click **"Create pull request"**
-4. Go to the **Checks** tab on the PR page
+## I. Trigger the Failure (RED Check)
 
-**Expected Result**: The pipeline status will resolve to **RED (Failed)**, proving the bug was caught automatically.
+The goal is to push the bug and observe the automated pipeline reject it.
 
----
-
-## 🟢 Exercise 2: Fix the Bug and Pass CI (GREEN Check)
-
-This exercise shows getting instant, automated approval after fixing the issue.
-
-### 1. Fix the Code Locally
-
-Open `app.py` in your editor and correct the bug in the `calculate_discount` function:
-
-**Locate this line in `app.py`:**
-```python
-discount_amount = price * 0.01
-```
-
-**Change it to:**
-```python
-discount_amount = price * rate
-```
-
-### 2. Commit and Push the Fix
-
-Commit the correction and push to the same open PR branch. This automatically triggers a pipeline rerun.
+**1. Verify Local Branch:** Ensure you are on the feature branch:
 ```bash
-# Commit the fix
-git commit -am "Fix: Corrected discount calculation logic."
+git checkout feature/discount-fix-attempt
+```
 
-# Push to update the open PR
+**2. Confirm Bug Exists:** Run tests locally to see the expected failure message:
+```bash
+pytest
+```
+
+Expectation: 1 test fails (`test_discount_calculation_failure_demo`).
+
+**3. Push and Open PR:** Push the current state of the code to GitHub and open a Pull Request against the `main` branch.
+```bash
+git push -u origin feature/discount-fix-attempt
+```
+
+(Go to GitHub and create the PR.)
+
+**4. Observe Failure:** Monitor the "Checks" section of the PR.
+
+Result: The GitHub Actions pipeline status turns RED (Failed), specifically due to the Unit Test failure. The merge is blocked.
+
+## II. Fix the Code and Validate (GREEN Check)
+
+The goal is to fix the bug locally and let the pipeline instantly verify the correction.
+
+**1. Implement the Fix:** Open `app.py` and correct the logic error in the `calculate_discount` function:
+```python
+# Change the faulty line:
+discount_amount = price * 0.01 
+
+# To the correct line:
+discount_amount = price * rate 
+```
+
+**2. Commit the Fix:** Save the file and commit the correction to the same branch:
+```bash
+git commit -am "Fix: Corrected discount calculation logic."
+```
+
+**3. Push and Rerun CI:** Push the correction to GitHub. This automatically triggers a new pipeline run.
+```bash
 git push
 ```
 
-### 3. Final Validation
+**4. Final Validation:** Return to the open PR on GitHub.
 
-1. Return to the PR page on GitHub
-2. Observe the pipeline rerun
-
-**Expected Result**: The status will resolve to **GREEN (Success)**. The code is now validated and ready to merge.
+Result: The pipeline runs again and resolves to GREEN (Success). The code is now validated, and the merge is approved.
