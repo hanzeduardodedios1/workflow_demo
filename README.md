@@ -47,6 +47,39 @@ python3 -m pip install pytest flake8
 
 ---
 
+## 🚀 Initial Setup
+
+Before starting the exercises, you need to get the feature branch with the buggy code.
+
+### 1. Clone the Repository (if not already done)
+```bash
+git clone https://github.com/hanzeduardodedios1/workflow_demo.git
+cd workflow_demo
+```
+
+### 2. Switch to the Feature Branch
+```bash
+git fetch
+git checkout feature/discount-fix-attempt
+```
+
+### 3. Verify You're on the Correct Branch
+```bash
+git branch
+```
+You should see `* feature/discount-fix-attempt` (the asterisk indicates your current branch).
+
+### 4. Confirm the Bug Exists Locally
+```bash
+pytest
+```
+
+Expected output: 1 test fails (`test_discount_calculation_failure_demo`).
+
+Now you're ready to proceed with the demo!
+
+---
+
 # CI Demo Steps: Bug to Fix
 
 This process starts with the buggy code in your local `feature/discount-fix-attempt` branch and ends with a successful merge validation on GitHub.
